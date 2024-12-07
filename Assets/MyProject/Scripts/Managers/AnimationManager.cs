@@ -38,8 +38,5 @@ public class AnimationManager : MonoBehaviour
     public void UpdateStrafeState(bool isStrafing)
     {
         animator.SetBool("IsStrafing", isStrafing);
-
-        // Debug
-        Debug.Log($"Animator IsStrafing: {animator.GetBool("IsStrafing")}");
     }
 }

@@ -6,13 +6,15 @@ namespace MyProject.Scripts.Player
     public class PlayerMovement : MonoBehaviour
     {
         [Header("Movement Settings")]
-        public float moveSpeed = 5f;
-        public float sprintMultiplier = 2;
         public float rotationSpeed = 10f;
+        public float walkSpeed = 2.5f;
+        public float runSpeed = 5f;
+        public float sprintMultiplier = 2;
 
         [Header("References")]
         public AnimationManager animationManager;
         public InputManager inputManager;
+        private Transform cameraTransform;
 
         private Vector3 moveDirection;
         private Rigidbody rb;
@@ -31,6 +33,7 @@ namespace MyProject.Scripts.Player
         void Start()
         {
             rb = GetComponent<Rigidbody>();
+            cameraTransform = Camera.main?.transform;
             if (animationManager == null)
             {
                 animationManager = GetComponent<AnimationManager>();
@@ -76,7 +79,6 @@ namespace MyProject.Scripts.Player
                 toggleCoolDown = true; 
                 isStrafing = !isStrafing;
                 animationManager.UpdateStrafeState(isStrafing);
-                Debug.Log($"IsStrafing set to: {isStrafing}");
                 
                 Invoke(nameof(ResetToggleCoolDown), 0.2f);
             }
@@ -89,13 +91,29 @@ namespace MyProject.Scripts.Player
 
         private void HandleMovement()
         {
-            // Calculate direction based on input
-            moveDirection = new Vector3(inputManager.horizontalInput, 0, inputManager.verticalInput).normalized;
+            Vector3 forward = cameraTransform.forward;
+            Vector3 right = cameraTransform.right;
+            
+            forward.y = 0;
+            right.y = 0;
+            
+            forward.Normalize();
+            right.Normalize();
+            
+            moveDirection = (forward * inputManager.verticalInput + right * inputManager.horizontalInput).normalized;
 
             // Adjust speed for sprinting
-            float currentSpeed = inputManager.isSprinting ? moveSpeed * sprintMultiplier : moveSpeed;
+            float currentSpeed = walkSpeed;
 
-            // Apply movement if the player is moving
+            if (isMoving && inputManager.isSprinting)
+            {
+                currentSpeed = runSpeed * sprintMultiplier;
+            }
+            else if (isMoving && inputManager.moveAmount > 0.5f)
+            {
+                currentSpeed = runSpeed;
+            }
+            
             if (isMoving)
             {
                 Vector3 velocity = moveDirection * currentSpeed;

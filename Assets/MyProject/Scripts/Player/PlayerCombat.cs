@@ -1,3 +1,4 @@
+using MyProject.Scripts.Managers;
 using UnityEngine;
 
 namespace MyProject.Scripts.Player
@@ -9,6 +10,7 @@ namespace MyProject.Scripts.Player
 
         [Header("Setting")]
         [SerializeField] private Animator animator; 
+        private InputManager inputManager;
 
         private int currentComboStep = 0;
         private float comboResetTime = 3f; 
@@ -25,11 +27,12 @@ namespace MyProject.Scripts.Player
         {
             canProceedNextStep = true;
             animator = GetComponent<Animator>();
+            inputManager = GetComponent<InputManager>();
         }
         private void Update()
         {
-            bool lightPressed = Input.GetKeyDown(KeyCode.Mouse0);
-            bool heavyPressed = Input.GetKeyDown(KeyCode.Mouse1);
+            bool lightPressed = inputManager.lightAttackInput;
+            bool heavyPressed = inputManager.heavyAttackInput;
 
             if ((lightPressed || heavyPressed) && canProceedNextStep)
             {
@@ -91,11 +94,13 @@ namespace MyProject.Scripts.Player
         public void OnComboBegin()
         {
             canProceedNextStep = false;
+            Debug.Log("OnComboBegin");
         }
 
         public void OnFreeFLow()
         {
             canProceedNextStep = true;
+            Debug.Log("OnFreeFLow");
         }
 
         public void OnAttack()
@@ -107,11 +112,13 @@ namespace MyProject.Scripts.Player
         public void OffAttack()
         {
             attackActive = false;
+            Debug.Log("OffAttack");
         }
 
         public void OnComboEnd()
         {
             ResetCombo();
+            Debug.Log("OnComboEnd");
         }
     }
 }
