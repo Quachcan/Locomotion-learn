@@ -1,3 +1,4 @@
+using MyProject.Scripts.Managers;
 using UnityEngine;
 
 namespace MyProject.Scripts.Player
@@ -11,6 +12,7 @@ namespace MyProject.Scripts.Player
 
         [Header("References")]
         public AnimationManager animationManager;
+        public InputManager inputManager;
 
         private Vector3 moveDirection;
         private Rigidbody rb;
@@ -33,6 +35,11 @@ namespace MyProject.Scripts.Player
             {
                 animationManager = GetComponent<AnimationManager>();
             }
+
+            if (inputManager == null)
+            {
+                inputManager = GetComponent<InputManager>();
+            }
         }
 
         void Update()
@@ -44,20 +51,20 @@ namespace MyProject.Scripts.Player
             HandleStrafeToggle();
         }
 
-        private void FixedUpdate()
+        public void HandleAllMovement()
         {
             HandleMovement();
         }
 
         private void HandleInput()
         {
-            inputHorizontal = Input.GetAxis("Horizontal");
-            inputVertical = Input.GetAxis("Vertical");
+            //inputHorizontal = Input.GetAxis("Horizontal");
+            //inputVertical = Input.GetAxis("Vertical");
         
-            xInput = inputHorizontal;
-            yInput = inputVertical;
+            xInput = inputManager.horizontalInput;
+            yInput = inputManager.verticalInput;
 
-            isSprinting = Input.GetKey(KeyCode.LeftShift);
+            isSprinting = inputManager.isSprinting;
             // Check if player is moving
             isMoving = Mathf.Abs(xInput) > 0.1f || Mathf.Abs(yInput) > 0.1f;
         }
@@ -83,10 +90,10 @@ namespace MyProject.Scripts.Player
         private void HandleMovement()
         {
             // Calculate direction based on input
-            moveDirection = new Vector3(inputHorizontal, 0, inputVertical).normalized;
+            moveDirection = new Vector3(inputManager.horizontalInput, 0, inputManager.verticalInput).normalized;
 
             // Adjust speed for sprinting
-            float currentSpeed = isSprinting ? moveSpeed * sprintMultiplier : moveSpeed;
+            float currentSpeed = inputManager.isSprinting ? moveSpeed * sprintMultiplier : moveSpeed;
 
             // Apply movement if the player is moving
             if (isMoving)
@@ -119,7 +126,7 @@ namespace MyProject.Scripts.Player
         private void UpdateInputMagnitude()
         {
             // Calculate InputMagnitude target value 
-            float targetMagnitude = Mathf.Clamp01(new Vector2(inputHorizontal, inputVertical).magnitude);
+            float targetMagnitude = Mathf.Clamp01(new Vector2(inputManager.horizontalInput, inputManager.verticalInput).magnitude);
 
             if (isSprinting && isMoving)
             {
@@ -133,7 +140,7 @@ namespace MyProject.Scripts.Player
         private void SendMovementToAnimator()
         {
             // Calculate input magnitude for Blend Tree
-            float inputMagnitude = Mathf.Clamp01(new Vector2(inputHorizontal, inputVertical).magnitude);
+            float inputMagnitude = Mathf.Clamp01(new Vector2(inputManager.horizontalInput, inputManager.verticalInput).magnitude);
 
             // Determine motion state (0 = Start, 1 = Loop, 2 = End)
             float motionState = isMoving ? 1 : 2; // 1 = Loop when moving, 2 = End when stopping
