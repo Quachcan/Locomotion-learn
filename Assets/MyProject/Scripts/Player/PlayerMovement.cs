@@ -154,7 +154,7 @@ namespace MyProject.Scripts.Player
             }
 
             // Làm mượt giá trị InputMagnitude bằng Lerp
-            smoothedInputMagnitude = Mathf.Lerp(smoothedInputMagnitude, targetMagnitude, Time.deltaTime * 5f); // 5f là tốc độ mượt
+            smoothedInputMagnitude = Mathf.Lerp(smoothedInputMagnitude, targetMagnitude, Time.deltaTime * 5f); 
         }
 
         private void SendMovementToAnimator()
