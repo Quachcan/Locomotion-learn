@@ -21,6 +21,7 @@ namespace MyProject.Scripts.Player
         
         private bool canProceedNextStep = false;
         private bool attackActive = false;
+        public bool isAttacking = false;
 
 
         private void Start()
@@ -93,6 +94,7 @@ namespace MyProject.Scripts.Player
 
         public void OnComboBegin()
         {
+            isComboFinished = true;
             canProceedNextStep = false;
             Debug.Log("OnComboBegin");
         }
@@ -117,6 +119,7 @@ namespace MyProject.Scripts.Player
 
         public void OnComboEnd()
         {
+            isAttacking = false;
             ResetCombo();
             Debug.Log("OnComboEnd");
         }

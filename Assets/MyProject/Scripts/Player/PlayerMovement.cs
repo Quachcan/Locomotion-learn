@@ -15,6 +15,7 @@ namespace MyProject.Scripts.Player
         public AnimationManager animationManager;
         public InputManager inputManager;
         private Transform cameraTransform;
+        private PlayerCombat playerCombat;
 
         private Vector3 moveDirection;
         private Rigidbody rb;
@@ -34,6 +35,7 @@ namespace MyProject.Scripts.Player
         {
             rb = GetComponent<Rigidbody>();
             cameraTransform = Camera.main?.transform;
+            playerCombat = GetComponent<PlayerCombat>();
             if (animationManager == null)
             {
                 animationManager = GetComponent<AnimationManager>();

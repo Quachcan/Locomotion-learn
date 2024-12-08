@@ -8,9 +8,11 @@ public class PlayerManager : MonoBehaviour
     private InputManager inputManager;
     private CameraManager cameraManager;
     private PlayerMovement playerMovement;
+    private PlayerCombat playerCombat;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        playerCombat = GetComponent<PlayerCombat>();
         inputManager = GetComponent<InputManager>();   
         playerMovement = GetComponent<PlayerMovement>();
         cameraManager = FindFirstObjectByType<CameraManager>();

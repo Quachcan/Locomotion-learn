@@ -1184,9 +1184,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 0}
   cameraPivot: {fileID: 646714176}
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 257
+  cameraCollisionOffSet: 0.2
+  minimumCollisionOffSet: 0.2
+  cameraCollisionRadius: 0.4
   cameraFollowSpeed: 0.2
-  cameraLookSpeed: 0.4
-  cameraPivotSpeed: 0.4
+  cameraLookSpeed: 2
+  cameraPivotSpeed: 1
   lookAngle: 0
   pivotAngle: 0
   minimumPivotAngle: -35
@@ -5153,7 +5159,7 @@ Transform:
   m_GameObject: {fileID: 1511995701951426873}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.801, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5173,9 +5179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c516df02c064f638c8df8e48407f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  sprintMultiplier: 1.5
   rotationSpeed: 10
+  walkSpeed: 2.5
+  runSpeed: 5
+  sprintMultiplier: 1.5
   animationManager: {fileID: 1511995701951524187}
   inputManager: {fileID: 0}
   isStrafing: 0
@@ -5233,6 +5240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboData: {fileID: 11400000, guid: 7a7209582cb19434a97dd49d8a15bdcc, type: 2}
   animator: {fileID: 1511995701941895961}
+  isAttacking: 0
 --- !u!114 &1511995701951524191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5249,6 +5257,7 @@ MonoBehaviour:
   cameraInput: {x: 0, y: 0}
   cameraInputX: 0
   cameraInputY: 0
+  moveAmount: 0
   horizontalInput: 0
   verticalInput: 0
   isSprinting: 0
