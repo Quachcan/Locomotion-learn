@@ -1,28 +1,41 @@
 using MyProject.Scripts.Managers;
+using MyProject.Scripts.Weapon;
 using UnityEngine;
 
 namespace MyProject.Scripts.Player
 {
     public class PlayerCombat : MonoBehaviour
     {
+        [Header("References")]
+        [SerializeField]
+        private WeaponHandler weaponHandler;
+        
         [Header("Combo Data")]
-        [SerializeField] private ComboData comboData;
-
+        [SerializeField] 
+        private ComboData comboData;
+        
         [Header("Setting")]
-        [SerializeField] private Animator animator; 
+        [SerializeField]
+        private Animator animator; 
+        [SerializeField]
         private InputManager inputManager;
-
-        private int currentComboStep = 0;
+        
+        [Header("Combo Settings")]
+        [SerializeField]
+        private int currentComboStep;
+        [SerializeField]
         private float comboResetTime = 3f; 
-        private float lastInputTime = 0f;
+        [SerializeField]
+        private float lastInputTime;
+        [SerializeField]
         private bool isComboFinished;
-        
-        private float minComboInputTime = 1f; 
-        
+        //private float minComboInputTime = 1f; 
+        [SerializeField]
         private bool canProceedNextStep = false;
+        [SerializeField]
         private bool attackActive = false;
         public bool isAttacking = false;
-
+        
 
         private void Start()
         {
@@ -62,8 +75,7 @@ namespace MyProject.Scripts.Player
                 PlayComboClip(currentComboStep);
                 currentComboStep++;
                 lastInputTime = Time.time;
-
-                // Tạm thời khóa input combo tiếp theo, chờ OnFreeFlow trong animation clip này gọi
+                
                 canProceedNextStep = false;
             }
             else
@@ -104,10 +116,12 @@ namespace MyProject.Scripts.Player
             canProceedNextStep = true;
             Debug.Log("OnFreeFLow");
         }
-
+        
         public void OnAttack()
         {
+            isAttacking = true;
             attackActive = true;
+            weaponHandler.OnAttack();
             Debug.Log("OnAttack");
         }
 
@@ -120,8 +134,10 @@ namespace MyProject.Scripts.Player
         public void OnComboEnd()
         {
             isAttacking = false;
+            weaponHandler.OffAttack();
             ResetCombo();
             Debug.Log("OnComboEnd");
         }
+        
     }
 }

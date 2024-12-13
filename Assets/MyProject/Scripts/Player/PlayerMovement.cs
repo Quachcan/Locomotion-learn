@@ -1,3 +1,4 @@
+using System.Collections;
 using MyProject.Scripts.Managers;
 using UnityEngine;
 
@@ -63,14 +64,10 @@ namespace MyProject.Scripts.Player
 
         private void HandleInput()
         {
-            //inputHorizontal = Input.GetAxis("Horizontal");
-            //inputVertical = Input.GetAxis("Vertical");
-        
             xInput = inputManager.horizontalInput;
             yInput = inputManager.verticalInput;
 
             isSprinting = inputManager.isSprinting;
-            // Check if player is moving
             isMoving = Mathf.Abs(xInput) > 0.1f || Mathf.Abs(yInput) > 0.1f;
         }
 
@@ -81,8 +78,8 @@ namespace MyProject.Scripts.Player
                 toggleCoolDown = true; 
                 isStrafing = !isStrafing;
                 animationManager.UpdateStrafeState(isStrafing);
-                
-                Invoke(nameof(ResetToggleCoolDown), 0.2f);
+
+                StartCoroutine(ResetToggleCoolDownRoutine());
             }
         }
 
@@ -91,6 +88,11 @@ namespace MyProject.Scripts.Player
             toggleCoolDown = false;
         }
 
+        private IEnumerator ResetToggleCoolDownRoutine()
+        {
+            yield return new WaitForSeconds(0.2f);
+            ResetToggleCoolDown();
+        }
         private void HandleMovement()
         {
             Vector3 forward = cameraTransform.forward;
@@ -160,7 +162,7 @@ namespace MyProject.Scripts.Player
         private void SendMovementToAnimator()
         {
             // Calculate input magnitude for Blend Tree
-            float inputMagnitude = Mathf.Clamp01(new Vector2(inputManager.horizontalInput, inputManager.verticalInput).magnitude);
+            //float inputMagnitude = Mathf.Clamp01(new Vector2(inputManager.horizontalInput, inputManager.verticalInput).magnitude);
 
             // Determine motion state (0 = Start, 1 = Loop, 2 = End)
             float motionState = isMoving ? 1 : 2; // 1 = Loop when moving, 2 = End when stopping

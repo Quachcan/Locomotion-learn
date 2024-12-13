@@ -25,3 +25,23 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: 92a655ff2822c401aa5547eb8a1f5ff9, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 060cf807b8bbc4a688033e20eff9f001, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 060cf807b8bbc4a688033e20eff9f001, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 65bcfc35cffc74f77ae9bad316408d7c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 65bcfc35cffc74f77ae9bad316408d7c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3bce736080e1c4abcb97395f3213b874, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3bce736080e1c4abcb97395f3213b874, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: db744b9efad97482ca7fce01d5492dd8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: db744b9efad97482ca7fce01d5492dd8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: afac30d8414d243919f8459f42c2c1de, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: afac30d8414d243919f8459f42c2c1de, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ce924aadb89444018809c3d433b4b633, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ce924aadb89444018809c3d433b4b633, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5a1de749ad6fb4cb7b2b14f3c62bdb1e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5a1de749ad6fb4cb7b2b14f3c62bdb1e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c0e05d35a81724258ae1c8f25ec261f7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c0e05d35a81724258ae1c8f25ec261f7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2107d3e9154554e1983136c761679144, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 97132cc07d365427b832d6b78ac363d4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 9e3fb4a2593c7477e8a2b3ce0c13364b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a3472dd0087c449c6a3175673e29e46f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 025fea984df0d4069b9cc3937edd3285, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d46dbb061646e4a92935b1c5f74e1d1e, type: 2}
